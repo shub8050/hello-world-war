@@ -1,0 +1,11 @@
+---
+- name: Run tomcat and copy files
+  hosts: production
+  become: true
+  become_user: root
+  tasks:
+  - name: copy files
+    copy: src=/opt/hello-world-war-1.0.0.war
+          dest=/opt/apache-tomcat-8.5.34/webapps
+  - name: Start tomcat
+    command: cd /opt/apache-tomcat-8.5.34/bin | ./startup.sh
