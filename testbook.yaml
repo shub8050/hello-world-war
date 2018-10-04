@@ -1,11 +1,8 @@
 ---
-- name: Run tomcat and copy files
+- name: Pull and deploy container from github
   hosts: production
-  become: true
   become_user: root
+  become: true
   tasks:
-  - name: copy files
-    copy: src=/opt/hello-world-war-1.0.0.war
-          dest=/opt/apache-tomcat-8.5.34/webapps
-  - name: Start tomcat
-    command: cd /opt/apache-tomcat-8.5.34/bin | ./startup.sh
+  - name: run container, PORT 9090 running the container
+    command: docker run -d -p 9090:8080 shub8050/myapp:1.0
